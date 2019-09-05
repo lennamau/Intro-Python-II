@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -33,6 +34,8 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+player = Player("Danny", room['outside'])
+
 #
 # Main
 #
@@ -49,3 +52,37 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+while True:
+    # print current room
+    current_room = player.current_room
+    print(player.current_room.title)
+    print(player.current_room.description)
+    command = input("===>>>")
+    if command == "n":
+        if current_room.n_to is not None:
+            player.current_room = current_room.n_to
+        else:
+            print("You can't go that way")
+
+    elif command == "s":
+        if current_room.s_to is not None:
+            player.current_room = current_room.s_to
+        else:
+            print("You can't go that way")
+
+    elif command == "e":
+        if current_room.e_to is not None:
+            player.current_room = current_room.e_to
+        else:
+            print("You can't go that way")
+
+    elif command == "w":
+        if current_room.w_to is not None:
+            player.current_room = current_room.w_to
+        else:
+            print("You can't go that way")
+
+    elif command == "q":
+        print("See you later!")
+        break
